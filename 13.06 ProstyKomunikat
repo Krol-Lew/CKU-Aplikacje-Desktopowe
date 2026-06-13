@@ -1,0 +1,37 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ProstyKomunikat extends JFrame {
+
+
+    private JLabel lblEtykieta = new JLabel("Etykieta");
+    private JButton btnPrzycisk = new JButton("Przycisk");
+
+    public ProstyKomunikat(){
+        setTitle("Prosty Komunikat");
+        setSize(300,300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel panel=new JPanel();
+
+        lblEtykieta = new JLabel("Przycisk");
+        btnPrzycisk = new JButton("Kliknij mnie");
+
+        panel.add(lblEtykieta);
+        panel.add(btnPrzycisk);
+
+        btnPrzycisk.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lblEtykieta.setText("Przycisk został kliknięty");
+            }
+        });
+        add(panel);
+
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new ProstyKomunikat();
+    }
+}

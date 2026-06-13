@@ -1,0 +1,77 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class FormularzAnkiety extends JFrame {
+    private JLabel lblTytul;
+    private JLabel lblImie;
+    private JTextField txtImie;
+    private JLabel lblKolor;
+    private JTextField txtKolor;
+    private JLabel lblJedzenie;
+    private JTextField txtJedzenie;
+    private JButton btnWyslij;
+    private JLabel lblWYnik;
+
+    public FormularzAnkiety(){
+        setTitle("Formularz Ankiety");
+        setSize(300,400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel panel=new JPanel();
+        //ustawianie managera ikłądu na box layout, jeden pod drugim
+        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+        //ramka dookoła
+        panel.setBorder(BorderFactory.createEmptyBorder(15,15,15,15));
+        lblTytul = new JLabel("Ankieta");
+        lblImie = new JLabel("Imię:");
+        txtImie = new JTextField(20);
+        lblKolor = new JLabel("Ulubiony kolor:");
+        txtKolor = new JTextField(20);
+        lblJedzenie = new JLabel("Ulubione jedzenie:");
+        txtJedzenie = new JTextField(30);
+        btnWyslij = new JButton("Wyślij ankietę");
+        lblWYnik = new JLabel("Tu pojawi się wynik");
+        panel.add(lblTytul);
+        lblTytul.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.add(lblImie);
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // odstęp 10px
+        lblImie.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.add(txtImie);
+        txtImie.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.add(lblKolor);
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // odstęp 10px
+        lblKolor.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.add(txtKolor);
+        txtKolor.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.add(lblJedzenie);
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // odstęp 10px
+        lblJedzenie.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.add(txtJedzenie);
+        txtJedzenie.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.add(btnWyslij);
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // odstęp 10px
+
+        btnWyslij.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.add(lblWYnik);
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // odstęp 10px
+
+        lblWYnik.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        btnWyslij.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String wynikStr="<b> Imię </b>"+txtImie.getText()+" | <b> Kolor "+txtKolor.getText()+"</b> | <b> Jedzenie "+txtJedzenie.getText()+"</b>";
+                lblWYnik.setText("<html>"+wynikStr+"</html>");
+            }
+        });
+        add(panel);
+        setVisible(true);
+    }
+
+
+    public static void main(String[] args) {
+        new FormularzAnkiety();
+    }
+    }
+

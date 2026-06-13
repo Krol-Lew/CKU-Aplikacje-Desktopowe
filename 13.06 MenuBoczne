@@ -1,0 +1,79 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class MenuBoczne extends JFrame {
+    JButton btnGlowna;
+    JButton btnProfil;
+    JButton btnUstawienia;
+    JButton btnWyloguj;
+    JLabel lblStatus;
+
+    MenuBoczne(){
+        setTitle("Menu Boczne");
+        setSize(500,200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout(5,5));
+
+        //WEST
+        JPanel panelZachodni=new JPanel();
+        panelZachodni.setLayout(new BoxLayout(panelZachodni,BoxLayout.Y_AXIS));
+        btnGlowna=new JButton("Strona Główna");
+        btnProfil=new JButton("Profil");
+        btnUstawienia=new JButton("Ustawienia");
+        btnWyloguj=new JButton("Wyloguj");
+        panelZachodni.add(btnGlowna);
+        panelZachodni.add(Box.createRigidArea(new Dimension(5,10)));
+        panelZachodni.add(btnProfil);
+        panelZachodni.add(Box.createRigidArea(new Dimension(5,10)));
+        panelZachodni.add(btnUstawienia);
+        panelZachodni.add(Box.createRigidArea(new Dimension(5,10)));
+        panelZachodni.add(btnWyloguj);
+        panelZachodni.add(Box.createRigidArea(new Dimension(5,10)));
+        add(panelZachodni,BorderLayout.WEST);
+
+        //CENTER
+        lblStatus = new JLabel();
+        add(lblStatus,BorderLayout.CENTER);
+
+        btnGlowna.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lblStatus.setText("Wybrano: Strona Główna");
+            }
+        });
+
+        btnProfil.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lblStatus.setText("Wybrano: Profil");
+            }
+        });
+
+        btnUstawienia.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lblStatus.setText("Wybrano: Ustawienia");
+            }
+        });
+
+        btnWyloguj.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lblStatus.setText("Wybrano: Wyloguj");
+            }
+        });
+
+
+
+        setVisible(true);
+    }
+
+
+
+    public static void main(String[] args) {
+    new MenuBoczne();
+
+    }
+}

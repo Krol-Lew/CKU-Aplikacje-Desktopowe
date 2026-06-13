@@ -1,0 +1,53 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class PrzelicznikWalut extends JFrame {
+    private JLabel lblKwota;
+    private JTextField txtPole;
+    private JButton btnPrzelicz;
+    private JLabel lblWynik;
+
+
+    public PrzelicznikWalut(){
+        setTitle("Przelicznik walut");
+        setSize(500,100);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel panel=new JPanel();
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT,10,10));
+
+        lblKwota=new JLabel("Podaj kwotę PLN");
+        txtPole = new JTextField(8);
+        btnPrzelicz = new JButton("Przelicz na EUR");
+        lblWynik=new JLabel("Wynik: ");
+
+        panel.add(lblKwota);
+        panel.add(txtPole);
+        panel.add(btnPrzelicz);
+        panel.add(lblWynik);
+
+        btnPrzelicz.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    double pln=Double.parseDouble(txtPole.getText());
+                    double eur=pln/4.32;
+                    lblWynik.setText(String.format("Kupujesz %.2f Euro",eur ));
+                }catch(NumberFormatException ex){
+                    lblWynik.setText("Błąd! Kwota musi być liczbą!");
+                }
+
+            }
+
+        });
+
+        add(panel);
+
+        setVisible(true);
+    }
+    public static void main(String[] args) {
+        new PrzelicznikWalut();
+    }
+}

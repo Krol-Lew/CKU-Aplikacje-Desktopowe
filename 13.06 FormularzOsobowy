@@ -1,0 +1,52 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class FormularzOsobowy extends JFrame {
+
+
+    private JLabel lblImie;
+    private JTextField txtImie;
+    private JLabel lblNazwisko;
+    private JTextField txtNazwisko;
+    private JButton btnWyswietl;
+    private JLabel lblWynik;
+
+    public FormularzOsobowy(){
+        setTitle("Formularz Osobowy");
+        setSize(600,100);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        JPanel panel=new JPanel();
+        panel.setLayout(new FlowLayout(FlowLayout.RIGHT,15,10));
+
+        lblImie=new JLabel("Imię: ");
+        txtImie=new JTextField(10);
+        lblNazwisko=new JLabel("Nazwisko: ");
+        txtNazwisko=new JTextField(10);
+        btnWyswietl=new JButton("Wyświetl");
+        lblWynik=new JLabel("---");
+
+        panel.add(lblImie);
+        panel.add(txtImie);
+        panel.add(lblNazwisko);
+        panel.add(txtNazwisko);
+        panel.add(btnWyswietl);
+        panel.add(lblWynik);
+
+        btnWyswietl.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lblWynik.setText("Witaj: "+txtImie.getText()+" "+txtNazwisko.getText()+"!");
+            }
+        });
+        add(panel);
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new FormularzOsobowy();
+    }
+}

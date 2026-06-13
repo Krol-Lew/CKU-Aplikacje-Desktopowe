@@ -1,0 +1,129 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class DaneOsobowe extends JFrame {
+    //carLayout trzeba jawnie zdefiniować!!
+    private CardLayout cardLayout;
+    private JPanel panelKart;
+    private JButton btnPoprzednia;
+    private JButton btnNastepna;
+    private int numerKarty=1;
+
+    public DaneOsobowe(){
+        setTitle("Dane Osobowe");
+        setSize(450,200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout(5,5));
+
+        cardLayout = new CardLayout();//tworzymy układ card layout
+        panelKart= new JPanel(cardLayout);//ustawiamy w panelu kart ukłąd cardlayout
+
+        //karta 1
+        JPanel karta1 = new JPanel();
+        karta1.setLayout(new BoxLayout(karta1,BoxLayout.Y_AXIS));
+        karta1.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+        JLabel lblStr1 = new JLabel("Strona 1 - dane osobowe");
+        lblStr1.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JLabel lblImie=new JLabel("Imie");
+        lblImie.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JTextField txtImie=new JTextField(20);
+        txtImie.setAlignmentX(Component.LEFT_ALIGNMENT);
+        //dodaje komponenty do karty 1
+        karta1.add(lblStr1);
+        karta1.add(Box.createRigidArea(new Dimension(0,10)));
+        karta1.add(lblImie);
+        karta1.add(txtImie);
+
+        //karta 2
+        JPanel karta2 = new JPanel();
+        karta2.setLayout(new BoxLayout(karta2,BoxLayout.Y_AXIS));
+        karta2.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+        JLabel lblStr2 = new JLabel("Strona 2 - adres");
+        lblStr2.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JLabel lblMiasto=new JLabel("Adres");
+        lblMiasto.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JTextField txtMiasto=new JTextField(20);
+        txtMiasto.setAlignmentX(Component.LEFT_ALIGNMENT);
+        //dodaje komponenty do karty 2
+        karta2.add(lblStr2);
+        karta2.add(Box.createRigidArea(new Dimension(0,10)));
+        karta2.add(lblMiasto);
+        karta2.add(txtMiasto);
+
+
+        //karta 3
+        JPanel karta3 = new JPanel();
+        karta3.setLayout(new BoxLayout(karta3,BoxLayout.Y_AXIS));
+        karta3.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+        JLabel lblStr3 = new JLabel("Strona 3 - zatwierdzenie");
+        lblStr3.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JButton btnZatwierdz=new JButton("Zatwierdź");
+        btnZatwierdz.setAlignmentX(Component.LEFT_ALIGNMENT);
+        //dodaje komponenty do karty 3
+        karta3.add(lblStr3);
+        karta3.add(Box.createRigidArea(new Dimension(0,10)));
+        karta3.add(btnZatwierdz);
+        //do panelu kart dodajemy karty
+
+        panelKart.add(karta1,"karta 1");
+        panelKart.add(karta2,"karta 2");
+        panelKart.add(karta3,"karta 3");
+
+        //dodaj karty do panelu
+        add(panelKart,BorderLayout.CENTER);
+
+        //dodaje przyciski sterujące nast i poprz
+        JPanel panelPoludniowy=new JPanel(new FlowLayout(FlowLayout.CENTER));
+        btnPoprzednia=new JButton("Poprzednia");
+        panelPoludniowy.add(btnPoprzednia);
+        btnNastepna=new JButton("Następna");
+        panelPoludniowy.add(btnNastepna);
+        //dodaje panel południowy do części południowej okienka
+        add(panelPoludniowy, BorderLayout.SOUTH);
+
+        btnPoprzednia.setEnabled(false);
+
+        btnPoprzednia.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                numerKarty --;
+                if(numerKarty>1) btnPoprzednia.setEnabled(true);
+                else btnPoprzednia.setEnabled(false);
+                if (numerKarty<3) btnNastepna.setEnabled(true);
+                else btnNastepna.setEnabled(false);
+                cardLayout.show(panelKart,"karta "+numerKarty);
+            }
+        });
+
+        btnNastepna.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                numerKarty ++;
+                if(numerKarty>1) btnPoprzednia.setEnabled(true);
+                else btnPoprzednia.setEnabled(false);
+                if (numerKarty<3) btnNastepna.setEnabled(true);
+                else btnNastepna.setEnabled(false);
+                cardLayout.show(panelKart,"karta "+numerKarty);
+            }
+        });
+
+        btnZatwierdz.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String wynikStr  ="Imie: "+txtImie.getText()+"\nMiasto: "+txtMiasto.getText();
+                JOptionPane.showMessageDialog(null, wynikStr, "Zatwierdzono",JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+
+        setVisible(true);
+    }
+
+public static void main(String[] args) {
+    new DaneOsobowe();
+}
+
+}
+

@@ -1,0 +1,67 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ListaZadan extends JFrame {
+    private JLabel lbllistaZadan;
+    private JTextArea txtZadania;
+    private JTextField txtZadanie;
+    private JButton btndodajZadanie;
+    private JButton btnWyczysc;
+
+    public ListaZadan(){
+        setTitle("Lista Zadań");
+        setSize(600,400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
+        setLayout(new BorderLayout(10,10));
+
+        //NORTH
+        lbllistaZadan=new JLabel("Lista Zadań");
+        add(lbllistaZadan,BorderLayout.NORTH);
+
+        //CENTER
+        txtZadania=new JTextArea("");
+        JScrollPane listaZadan = new JScrollPane(txtZadania);
+        add(listaZadan,BorderLayout.CENTER);
+
+        //SOUTH
+        JPanel panelPoludniowy=new JPanel(new FlowLayout(FlowLayout.LEFT));
+        txtZadanie = new JTextField(35);
+        btndodajZadanie = new JButton("Dodaj Zadanie");
+        panelPoludniowy.add(txtZadanie);
+        panelPoludniowy.add(btndodajZadanie);
+        add(panelPoludniowy,BorderLayout.SOUTH);
+
+        //EAST
+        btnWyczysc = new JButton("Wyczyść listę");
+        add(btnWyczysc,BorderLayout.EAST);
+
+        btndodajZadanie.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String zadanie=txtZadanie.getText();
+                txtZadania.append(zadanie+"\n");
+                txtZadanie.setText("");
+
+
+            }
+        });
+        btnWyczysc.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtZadania.setText("");
+            }
+        });
+
+        setVisible(true);
+
+    }
+
+
+
+    public static void main(String[] args) {
+        new ListaZadan();
+
+    }
+}

@@ -1,0 +1,54 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class LicznikKlikniec extends JFrame {
+    private JLabel lblLicznik;
+    private JButton btnKliknij;
+    private JButton btnResetuj;
+    private int licznik=0;
+
+    public LicznikKlikniec(){
+        setTitle("Licznik Kliknięć");
+        setSize(400,100);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel panel = new JPanel();
+        //jawnie definiuję managera układu sposób 1
+        FlowLayout flowlayout = new FlowLayout(FlowLayout.CENTER, 10,10);
+        panel.setLayout(flowlayout);
+        //anonimowo tworzę managera układu - sposób 2
+        //panel.setLayout(new FlowLayout(FlowLayout.CENTER,10,10));
+
+        //definiuje kontrolki
+        lblLicznik= new JLabel("Licznik:0");
+        btnKliknij=new JButton("Kliknij mnie!");
+        btnResetuj = new JButton("Resetuj");
+
+        //dodaje kontrolki do panelu
+        panel.add(lblLicznik);
+        panel.add(btnKliknij);
+        panel.add(btnResetuj);
+
+        btnKliknij.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                licznik ++;
+                lblLicznik.setText("Licznik: "+licznik);
+            }
+        });
+        btnResetuj.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                licznik=0;
+                lblLicznik.setText("Licznik: "+licznik);
+            }
+        });
+        add(panel);//dodaje panel do okna
+
+        setVisible(true);
+    }
+    public static void main(String[] args) {
+        new LicznikKlikniec();
+    }
+    }

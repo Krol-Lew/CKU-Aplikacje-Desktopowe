@@ -1,0 +1,59 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class KalkulatorWalut extends JFrame {
+    private JLabel lblTytul;
+    private JLabel lblKwota;
+    private JTextField txtKwota;
+    private JButton btnPrzelicz;
+    private JLabel lblStatus;
+
+    public KalkulatorWalut(){
+        setTitle("Kalkulator Walut");
+        setSize(500,200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout(5,5));//anonimowe ustawienie layoutu
+        lblTytul = new JLabel("Kalkulator Walut",SwingConstants.CENTER);//wyśrodkowuje napis
+        add(lblTytul, BorderLayout.NORTH);//napis w rejonie północnym
+
+        JPanel panelCentralny=new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));
+        add(panelCentralny,BorderLayout.CENTER);
+
+        //definicja kontrolek dla panelu centralnego
+        lblKwota = new JLabel("kwota PLN");
+        txtKwota = new JTextField(8);
+        btnPrzelicz = new JButton("Przelicz na Euro");
+
+        //dodajemy kontrolki do panelu centralnego
+        panelCentralny.add(lblKwota);
+        panelCentralny.add(txtKwota);
+        panelCentralny.add(btnPrzelicz);
+
+        lblStatus=new JLabel("Gotowy", SwingConstants.CENTER);
+        add(lblStatus, BorderLayout.SOUTH);
+
+        btnPrzelicz.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    String plnStr =txtKwota.getText();
+                    double plnDbl=Double.parseDouble(plnStr);
+                    double euroDbl=plnDbl/4.25;
+                    lblStatus.setText(String.format("Kupujesz %.2f Euro",euroDbl));
+                }catch (NumberFormatException ex){
+                    lblStatus.setText("Błąd Kwota powinna być liczbą rzeczywistą");
+                    txtKwota.setText("");
+                }
+
+            }
+        });
+        //
+
+        setVisible(true);
+    }
+    public static void main(String[] args) {
+        new KalkulatorWalut();
+    }
+}

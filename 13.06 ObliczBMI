@@ -1,0 +1,58 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ObliczBMI extends JFrame {
+        private JLabel lblWaga;
+        private JTextField txtWaga;
+        private JLabel lblWzrost;
+        private JTextField txtWzrost;
+        private JButton btnOblicz;
+        private JLabel lblWynik;
+
+        public ObliczBMI(){
+            setTitle("Oblicz BMI");
+            setSize(500,100);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            JPanel panel=new JPanel();
+            panel.setLayout(new FlowLayout(FlowLayout.CENTER, 8,8));
+
+            lblWaga=new JLabel("Waga (kg):");
+            txtWaga=new JTextField(6);
+            lblWzrost = new JLabel("Wzrost (m):");
+            txtWzrost = new JTextField(6);
+            btnOblicz = new JButton("Oblicz BMI");
+            lblWynik = new JLabel ("---");
+
+            panel.add(lblWaga);
+            panel.add(txtWaga);
+            panel.add(lblWzrost);
+            panel.add(txtWzrost);
+            panel.add(btnOblicz);
+            panel.add(lblWynik);
+
+
+
+            btnOblicz.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        double waga = Double.parseDouble(txtWaga.getText());
+                        double wzrost = Double.parseDouble(txtWzrost.getText());
+                        double bmi = waga / (wzrost * wzrost);
+                        lblWynik.setText(String.format("%.2f", bmi));
+                    } catch (NumberFormatException ex) {
+                        lblWynik.setText("Błąd! Waga i wzrost muszą mieć wartość liczbową!");
+                    }
+                }
+            });
+
+        add(panel);
+        setVisible(true);
+    }
+    public static void main(String[] args) {
+        new ObliczBMI();
+    }
+}

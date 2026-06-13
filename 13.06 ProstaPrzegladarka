@@ -1,0 +1,60 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ProstaPrzegladarka extends JFrame {
+    private JLabel lblAdres;
+    private JTextField txtURL;
+    private JButton btnPrzejdz;
+    private JLabel lblStrona;
+    private JLabel lblStatus;
+
+    public ProstaPrzegladarka(){
+        setTitle("Prosta Przeglądarka");
+        setSize(500,400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setLayout(new BorderLayout(5,5));
+
+        //NORTH
+        JPanel panelPolnocny=new JPanel(new FlowLayout(FlowLayout.LEFT));
+        lblAdres = new JLabel("Adres");
+        txtURL = new JTextField(25);
+        btnPrzejdz = new JButton("Przejdź");
+        panelPolnocny.add(lblAdres);
+        panelPolnocny.add(txtURL);
+        panelPolnocny.add(btnPrzejdz);
+        add(panelPolnocny,BorderLayout.NORTH);
+
+        //CENTER
+        lblStrona=new JLabel("");
+        add(lblStrona,BorderLayout.CENTER);
+
+        //SOUTH
+        lblStatus=new JLabel("");
+        add(lblStatus,BorderLayout.SOUTH);
+
+        btnPrzejdz.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String url=txtURL.getText();
+                if (url.length()==0) {
+                    lblStrona.setText("Błąd! Nie podano adresu URL!");
+                    lblStatus.setText("Błąd! Nie podano adresu URL!");
+                }else{
+                    lblStrona.setText(String.format("Zawartość strony: %s",url));
+                    lblStatus.setText(String.format("Załadownao %s",url));
+                }
+            }
+        });
+
+        setVisible(true);
+
+}
+
+    public static void main(String[] args) {
+        new ProstaPrzegladarka();
+
+    }
+}

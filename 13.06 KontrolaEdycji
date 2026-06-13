@@ -1,0 +1,51 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class KontrolaEdycji extends JFrame {
+    private JTextField txtPole;
+    private JButton btnZablokuj;
+    private JButton btnOdblokuj;
+    private JLabel lblStatus;
+
+    public KontrolaEdycji(){
+        setTitle("Kontrola Edycji");
+        setSize(250,150);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel panel=new JPanel();
+
+        txtPole=new JTextField(20);
+        btnZablokuj=new JButton("Zablokuj");
+        btnOdblokuj = new JButton("Odblokuj");
+        lblStatus = new JLabel("Odblokowany");
+
+        panel.add(txtPole);
+        panel.add(btnZablokuj);
+        panel.add(btnOdblokuj);
+        panel.add(lblStatus);
+
+
+        btnOdblokuj.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtPole.setEditable(true);
+                lblStatus.setText("Odblokowany");
+            }
+        });
+
+        btnZablokuj.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtPole.setEditable(false);
+                lblStatus.setText("Zablokowany");
+            }
+        });
+
+        add(panel);
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new KontrolaEdycji();
+    }
+}

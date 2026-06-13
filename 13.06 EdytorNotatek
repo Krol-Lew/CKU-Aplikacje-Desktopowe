@@ -1,0 +1,65 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class EdytorNotatek extends JFrame {
+    private JLabel lblTytul;
+    private JTextField txtNotatka;
+    private JButton btnZapisz;
+    private JButton btnWyczysc;
+    private JLabel lblNotatka;
+    private JLabel lblStatus;
+
+    public EdytorNotatek(){
+        setTitle("Edytor Notatek");
+        setSize(500,400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setLayout(new BorderLayout(5,5));
+
+        //NORTH
+        lblTytul=new JLabel("Edytor Notatek", SwingConstants.CENTER);
+        add(lblTytul,BorderLayout.NORTH);
+
+        //CENTER
+        txtNotatka = new JFormattedTextField();
+        add(txtNotatka,BorderLayout.CENTER);
+
+        //SOUTH
+        JPanel panelPoludniowy = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        btnZapisz=new JButton("Zapisz");
+        btnWyczysc=new JButton("Wyczyść");
+        lblStatus = new JLabel("---");
+        panelPoludniowy.add(btnZapisz);
+        panelPoludniowy.add(btnWyczysc);
+        panelPoludniowy.add(lblStatus);
+        add(panelPoludniowy, BorderLayout.SOUTH);
+
+        //WEST
+        lblNotatka=new JLabel("Notatka");
+        add(lblNotatka, BorderLayout.WEST);
+
+        btnZapisz.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String notatka=txtNotatka.getText();
+                int znaki=notatka.length();
+                lblStatus.setText(String.format("%d",znaki));
+            }
+        });
+        btnWyczysc.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtNotatka.setText("");
+                lblStatus.setText("");
+            }
+        });
+
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new EdytorNotatek();
+    }
+}

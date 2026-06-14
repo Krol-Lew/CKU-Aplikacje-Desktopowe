@@ -1,0 +1,80 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+
+public class FormularzRejestracji extends JFrame {
+    private JLabel lblRejestracja;
+    private JLabel lblLogin;
+    private JTextField txtLogin;
+    private JLabel lblHaslo;
+    private JPasswordField pwdHaslo;
+    private JLabel lblPowtorz;
+    private JPasswordField pwdPowtorz;
+    private JButton btnZarejestruj;
+    private JLabel lblKomunikat;
+
+    public FormularzRejestracji(){
+        setTitle("Formularz rejestracji");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(500,300);
+
+        JPanel panel=new JPanel();
+        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+        panel.setBorder(BorderFactory.createEmptyBorder(15,15,15,15));
+
+        lblRejestracja=new JLabel("Rejestracja");
+        lblLogin=new JLabel("Login");
+        txtLogin=new JTextField(16);
+        lblHaslo=new JLabel("Podaj hasło");
+        pwdHaslo=new JPasswordField(16);
+        lblPowtorz=new JLabel("Powtórz hasło");
+        pwdPowtorz=new JPasswordField(16);
+        btnZarejestruj=new JButton("Zarejestruj");
+        lblKomunikat=new JLabel("");
+
+        panel.add(lblRejestracja);
+        panel.add(Box.createRigidArea(new Dimension(10,10)));
+        panel.add(lblLogin);
+        panel.add(Box.createRigidArea(new Dimension(10,10)));
+        panel.add(txtLogin);
+        panel.add(Box.createRigidArea(new Dimension(10,10)));
+        panel.add(lblHaslo);
+        panel.add(Box.createRigidArea(new Dimension(10,10)));
+        panel.add(pwdHaslo);
+        panel.add(Box.createRigidArea(new Dimension(10,10)));
+        panel.add(lblPowtorz);
+        panel.add(Box.createRigidArea(new Dimension(10,10)));
+        panel.add(pwdPowtorz);
+        panel.add(Box.createRigidArea(new Dimension(10,10)));
+        panel.add(btnZarejestruj);
+        panel.add(Box.createRigidArea(new Dimension(10,10)));
+        panel.add(lblKomunikat);
+
+        add(panel);
+
+        btnZarejestruj.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                char[] haslo1=pwdHaslo.getPassword();
+                char[] haslo2=pwdPowtorz.getPassword();
+                if (Arrays.equals(haslo1,haslo2)){
+                    lblKomunikat.setText("Rejestracja przebiegła pomyślnie!");
+                }else{
+                    lblKomunikat.setText("Błąd, hasła nie są zgodne!");
+                }
+            }
+        });
+
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+
+        new FormularzRejestracji();
+
+
+}
+
+}
